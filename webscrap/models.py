@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 
 class Tags(models.Model):
@@ -18,16 +19,27 @@ class Tags(models.Model):
 class jobDetails(models.Model):
     company_name = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
-    link= models.URLField(max_length=5000)
+    link = models.URLField(max_length=5000)
     description = models.TextField(null=True, blank=True)
-    tag = models.ForeignKey(Tags, null=False, blank=False, on_delete=models.CASCADE) # foreign key
+    tag = models.ForeignKey(Tags, null=False, blank=False, on_delete=models.CASCADE)  # foreign key
     date_of_entry = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-         return self.title
-    
+        return self.title
+
+
 class Personalize(models.Model):
-    user= models.ForeignKey(User, on_delete=models.CASCADE,null=False)
-    skill = models.CharField(max_length=100,default="")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    skill = models.CharField(max_length=100, default="")
+
     def __str__(self):
         return self.skill
+
+
+class Contact(models.Model):
+    email = models.CharField(max_length=100, default="")
+    username = models.CharField(max_length=100, default="")
+    query = models.CharField(max_length=1000, default="")
+
+    def __str__(self):
+        return self.username
