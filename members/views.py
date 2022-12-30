@@ -37,7 +37,7 @@ def signup_user(request):
             password=form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request,user)
-            messages.success(request,("registered successfull!!:>"))
+            messages.success(request, "registered successfull!!:>")
             return redirect('index')
     else:
         form=UserCreationForm()

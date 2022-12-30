@@ -15,6 +15,9 @@ class Tags(models.Model):
     def __str__(self):
         return self.skill
 
+    class Meta:
+        ordering = ["date_of_req"]
+
 
 class jobDetails(models.Model):
     company_name = models.CharField(max_length=200)
@@ -34,6 +37,10 @@ class Personalize(models.Model):
 
     def __str__(self):
         return self.skill
+
+    def get_personalised_data(self):
+        details = jobDetails.objects.filter(tag__skill=self.skill).all()
+        return details
 
 
 class Contact(models.Model):
