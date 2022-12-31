@@ -89,6 +89,9 @@ def post_scrapped_jobs(request):
     if data:
         tag = data["tag"]
         tag = Tags.objects.get(id=tag)
+        old_jobs = jobDetails.objects.filter(tag=tag).all()
+        for job in old_jobs:
+            job.delete()
         for job in data.get("jobs"):
             job_obj = jobDetails(
                 company_name=job[0],
